@@ -1,0 +1,7 @@
+library("ggplot2", lib.loc="~/R/win-library/3.1")
+library("gplots", lib.loc="~/R/win-library/3.1")
+library("dplyr", lib.loc="~/R/win-library/3.1")
+library("RCurl", lib.loc="~/R/win-library/3.1")
+library("reshape2", lib.loc="~/R/win-library/3.1")
+library("tidyr", lib.loc="~/R/win-library/3.1")
+library("jsonlite", lib.loc="~/R/win-library/3.1")
