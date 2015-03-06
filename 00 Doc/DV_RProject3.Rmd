@@ -1,0 +1,58 @@
+---
+title: "DV_RProject3"
+output: html_document
+---
+
+Project 3 Guidelines:
+```
+1. Create a GitHub Repository named DV_RProject3 (you only need one per project team). Register your Project URL using the "Register Your Project" link on the class website.
+
+2. Clone the project into a DV_RProject3 folder in your Data Visualization Folder, all of the project code should go into this repository.
+
+3. Create an RStudio DV_RProject3 Project (this is where you will do your development)
+
+4. The repository should have the following structure:
+  00 Doc
+  01 Data
+  02 Data Wrangling
+  03 Visualizations - this might not be needed if all your visualizations are in  workflows in the 02 Data Wrangling folder.
+
+5. Using KnitR, build an html file that documents the steps to reproduce your project . Use this html file to present a visual story about your data and what you discovered about your data using visualization techniques.
+
+6. Find several data sets (csv files) that can be joined and that you are interested in that is of a "natural science' or "business" orientation or is associated with the major you are studying. The data sets should be a many thousands of rows in the csv file.
+
+7. Register your data set type (e.g., census data) under the PROJECT_3_DATA column using the "Register Your Project" link on the class website. I WANT EACH PROJECT TO HAVE A DIFFERENT DATA SET TYPE. So, don't use a data set type that's already been registered. Yes, this is first-come, first-served.
+
+8. Load the csv files into Oracle as demonstrated in class on Feb 5th.
+
+9. Modify the following query by changing the SQL statement and filling in your USER and PASS to build data frames from your data (Note: the following has changed from what you did in the last project, be sure to use this new format, it's much faster):
+
+  df <- data.frame(fromJSON(getURL(URLencode('129.152.144.84:5001/rest/native  /?query="select * from DIAMONDS"'),httpheader=c(DB='jdbc:oracle:thin:@129.152.144  .84:1521:ORCL', USER='C##cs329e_uteid', PASS='orcl_uteid', MODE='native_mode',   MODEL='model', returnDimensions = 'False', returnFor = 'JSON'), verbose = TRUE)))
+
+Recommended steps for inserting your sql into the statement above:
+
+  Get your sql to work in SQLDeveloper.
+  If your sql has double quotes or single quotes in it, escape each of them with \\\ when placing them into the statement above.
+  If you insert R variables into your sql, which you need to do when you're using a looping variable from an R loop inside the sql, enclose each of them in double quotes - do not escape these double quotes.
+  Each variable that is inserted into your sql statement will need to have something similar to q=q as shown in line 7 of "10 ListsForIfFunctionsPng/ListsForIfFunctionsPng.R"
+
+10. Display an appropriate subset of your data frames in your KnitR document.
+
+11. Describe at least 3 interesting data wrangling sets of operations using %>% in each. Use an inner join, an outer join and at least one other operation under the "Combine Data Sets" column of the Data Wrangling Cheatsheet in your workflows.
+
+12. Produce some interesting visualizations of your wrangled data sets.
+
+13. Include in your html file a PNG image that shows a characterization of the categorical columns (as group by plots) and measure columns (as histograms) for your main table as was done in "10 ListsForIfFunctionsPng/ListsForIfFunctionsPng.R". The query for this should be like the following with the appropriate changes to the query, USER, and PASS:
+
+  categoricals <- eval(parse(text=substring(getURL(URLencode('http://129.152.144.84:5001/rest/native/?query="select * from emp"'), httpheader=c(DB='jdbc:oracle:thin:@129.152.144.84:1521:ORCL', USER='C##cs329e_uteid', PASS='orcl_uteid', MODE='native_mode', MODEL='model', returnFor = 'R', returnDimensions = 'True'), verbose = TRUE), 1, 2^31-1)))
+
+14. Be sure to use whatever is appropriate from the Beautiful Plotting tutorialsin steps 12 and 13.
+```
+```{r}
+source("../Rprofile.R", echo = FALSE) #load libraries
+```
+```{r}
+source("../01 Data/dataframes.R", echo = TRUE) #load dataframe
+tbl_df(df1)
+tbl_df(df2)
+```
